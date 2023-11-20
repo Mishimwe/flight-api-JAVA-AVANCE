@@ -5,7 +5,11 @@
   <groupId>fr.unilasalle.flight.api</groupId>
   <artifactId>flight-api</artifactId>
   <version>1.0.0-SNAPSHOT</version>
-  <properties>
+    <packaging>pom</packaging>
+    <modules>
+
+    </modules>
+    <properties>
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -70,6 +74,20 @@
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
+    <!-- LOMBOK -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.30</version>
+
+    </dependency>
+    <!-- APACHE COMMONS -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.13.0</version>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>
@@ -97,13 +115,16 @@
           </compilerArgs>
         </configuration>
       </plugin>
+
+
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire-plugin.version}</version>
         <configuration>
           <systemPropertyVariables>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            <maven.home>${maven.home}</maven.home>
+            <!--<maven.home>${maven.home}</maven.home>-->
+            <maven.home>D:\Program\apache-maven-3.9.5</maven.home>
           </systemPropertyVariables>
         </configuration>
       </plugin>
@@ -120,7 +141,8 @@
               <systemPropertyVariables>
                 <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
                 <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                <maven.home>${maven.home}</maven.home>
+                <!--<maven.home>${maven.home}</maven.home>-->
+                <maven.home>D:\Program\apache-maven-3.9.5</maven.home>
               </systemPropertyVariables>
             </configuration>
           </execution>
