@@ -5,7 +5,7 @@
   <groupId>fr.unilasalle.flight.api</groupId>
   <artifactId>flight-api</artifactId>
   <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <modules>
 
     </modules>
