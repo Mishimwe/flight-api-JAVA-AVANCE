@@ -1,5 +1,6 @@
 package fr.unilasalle.flight.api.repositories;
 
+import fr.unilasalle.flight.api.beans.Flight;
 import fr.unilasalle.flight.api.beans.Reservation;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
@@ -18,6 +19,6 @@ public class ReservationRepository implements PanacheRepositoryBase<Reservation,
         return find("flight.id", flightId).list();
     }
 
-    // Add any other methods you may need...
+
 
 }

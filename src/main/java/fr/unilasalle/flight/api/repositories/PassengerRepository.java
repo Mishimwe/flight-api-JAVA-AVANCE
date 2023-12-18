@@ -22,12 +22,9 @@ public class PassengerRepository implements PanacheRepositoryBase<Passenger, Lon
         Passenger existingPassenger = findById(passengerId);
 
         if (existingPassenger != null) {
-            // Update existing passenger with new information
             existingPassenger.setFirstname(firstname);
             existingPassenger.setSurname(surname);
             existingPassenger.setEmailAddress(emailAddress);
-
-            // Persist the changes
             persistAndFlush(existingPassenger);
         }
     }

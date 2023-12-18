@@ -54,7 +54,7 @@ public class FlightRessource extends GenericRessource {
             flightRepository.persistAndFlush(flight);
             return Response.status(201).entity(flight).build(); // 201 Created
         } catch (PersistenceException e) {
-            return Response.serverError().entity(new ErrorWrapper("Error during flight creation")).build();
+            return Response.serverError().entity(new ErrorWrapper("Erreur pendant la creations du vol")).build();
         }
     }
 
@@ -70,11 +70,11 @@ public class FlightRessource extends GenericRessource {
 
         try {
             flightRepository.delete(flight);
-            return Response.ok().entity("Flight and associated reservations deleted successfully").build();
+            return Response.ok().entity("Le vol associe a la reservation a éte suprimé").build();
         } catch (PersistenceException e) {
             // Log the exception details
-            e.printStackTrace();  // You can replace this with your logging framework
-            return Response.serverError().entity(new ErrorWrapper("Error deleting the Flight")).build();
+            e.printStackTrace();
+            return Response.serverError().entity(new ErrorWrapper("Erreur pendant la supression")).build();
         }
     }
 

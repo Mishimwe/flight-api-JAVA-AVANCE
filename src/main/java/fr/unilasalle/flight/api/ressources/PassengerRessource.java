@@ -16,6 +16,8 @@ import jakarta.ws.rs.core.Response;
 
 import jakarta.persistence.PersistenceException;
 
+import static io.undertow.httpcore.IoCallback.log;
+
 
 @Path("/passengers")
 @Produces(MediaType.APPLICATION_JSON)
@@ -46,8 +48,14 @@ public class PassengerRessource extends GenericRessource {
 
         try {
             passengerRepository.persistAndFlush(passenger);
+
+            Reservation reservation = new Reservation();
+            reservation.setPassenger(passenger);
+            reservationRepository.persistAndFlush(reservation);
+
             return Response.ok().entity(passenger).build();
         } catch (PersistenceException e) {
+            log.error("Erreur", e);
             return Response.serverError().entity(new ErrorWrapper("Erreur lors de l'enregistrement")).build();
         }
     }
@@ -73,11 +81,13 @@ public class PassengerRessource extends GenericRessource {
                     updatedPassenger.getEmail_address()
             );
 
-            return Response.ok().build();
+            String successMessage = "Success de la mises a jour";
+            return Response.ok().entity(successMessage).build();
         } catch (PersistenceException e) {
             return Response.serverError().entity(new ErrorWrapper("Erreur lors de la mise à jour du passager")).build();
         }
     }
+
 
 
     @GET

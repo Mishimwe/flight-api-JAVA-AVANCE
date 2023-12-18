@@ -1,5 +1,4 @@
 package fr.unilasalle.flight.api.ressources;
-
 import fr.unilasalle.flight.api.beans.Reservation;
 import fr.unilasalle.flight.api.repositories.ReservationRepository;
 import jakarta.inject.Inject;
@@ -10,9 +9,6 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.validation.Validator;
-
-import java.util.List;
-
 
 @Path("/reservations")
 @Produces(MediaType.APPLICATION_JSON)
@@ -36,7 +32,7 @@ public class ReservationRessource extends GenericRessource {
             reservationRepository.persistAndFlush(reservation);
             return Response.status(201).entity(reservation).build(); // 201 Created
         } catch (PersistenceException e) {
-            return Response.serverError().entity(new GenericRessource.ErrorWrapper("Error during reservation creation")).build();
+            return Response.serverError().entity(new GenericRessource.ErrorWrapper("Erreur pendant creation")).build();
         }
     }
     @GET
@@ -52,21 +48,23 @@ public class ReservationRessource extends GenericRessource {
         return getOr404(passengers);
     }
 
+
+
     @DELETE
-    @Path("/{reservationId}")
+    @Path("/{id}")
     @Transactional
-    public Response deleteReservation(@PathParam("reservationId") Long reservationId) {
+    public Response deleteReservation(@PathParam("id") Long reservationId) {
         Reservation existingReservation = reservationRepository.findById(reservationId);
 
         if (existingReservation == null) {
-            return Response.status(404).entity(new GenericRessource.ErrorWrapper("Reservation not found")).build();
+            return Response.status(404).entity(new GenericRessource.ErrorWrapper("Reservation non trouvée")).build();
         }
 
         try {
             reservationRepository.delete(existingReservation);
             return Response.ok().build();
         } catch (PersistenceException e) {
-            return Response.serverError().entity(new GenericRessource.ErrorWrapper("Error during reservation deletion")).build();
+            return Response.serverError().entity(new GenericRessource.ErrorWrapper("Error de supression")).build();
         }
     }
 }
